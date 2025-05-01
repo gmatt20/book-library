@@ -27,10 +27,14 @@ public class LibraryRestController {
     public ResponseEntity<String> deleteBook(@PathVariable Integer id){
         if(bookRepository.existsById(id)){
             bookRepository.deleteById(id);
-            return ResponseEntity.ok("Successfull deleted from database!");
+            return ResponseEntity.ok("Successfully deleted from database!");
         }
         else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
         }
     }
+
+    // Put Mapping
+
+    // Patch Mapping
 }
