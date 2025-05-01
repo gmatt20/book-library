@@ -5,6 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+// Must add validation to restful controller and Entity class
+
+// Must also add URL as something to modify to database
+
 @RestController
 @RequestMapping(path="/library")
 public class LibraryRestController {
