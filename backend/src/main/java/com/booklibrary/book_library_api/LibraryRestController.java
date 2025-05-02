@@ -39,9 +39,15 @@ public class LibraryRestController {
     }
 
     // Searches for a book based on title
-    @GetMapping("/book/search")
+    @GetMapping("/book/search/by-title")
     public List<Book> searchBooksByTitle(@RequestParam String keyword){
         return bookRepository.findByTitleContainingIgnoreCase(keyword);
+    }
+
+    // Searches for a book based on author
+    @GetMapping("/book/search/by-author")
+    public List<Book> searchBooksByAuthor(@RequestParam String keyword){
+        return bookRepository.findByAuthorContainingIgnoreCase(keyword);
     }
 
     // Deletes a book by ID
