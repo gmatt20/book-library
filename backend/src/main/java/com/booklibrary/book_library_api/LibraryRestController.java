@@ -16,13 +16,13 @@ public class LibraryRestController {
 
     private BookRepository bookRepository;
 
-    @PostMapping("/add")
+    @PostMapping("/book/add")
     public @ResponseBody String addNewBook(@RequestBody Book newBook){
         bookRepository.save(newBook);
         return "Saved!";
     }
 
-    @GetMapping("/all")
+    @GetMapping("/book/all")
     public @ResponseBody Iterable<Book> getAllBooks(){
         return bookRepository.findAll();
     }
@@ -39,6 +39,18 @@ public class LibraryRestController {
     }
 
     // Put Mapping
+    @PutMapping("/book/{id}")
+    public Book modifyBook(@RequestBody Book updateBook, @PathVariable Integer id){
+        return bookRepository.findById(id)
+                .map(book -> {
+                    book.setAuthor(updateBook.getAuthor());
+                    book.setTitle(updateBook.getTitle());
+                    return bookRepository.save(book);
+                })
+                .orElseGet(() -> {
+                    return bookRepository.save(updateBook);
+                });
+    }
 
     // Patch Mapping
 }
