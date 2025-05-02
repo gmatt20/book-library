@@ -1,5 +1,7 @@
-package com.booklibrary.book_library_api;
+package com.booklibrary.book_library_api.controller;
 
+import com.booklibrary.book_library_api.repository.BookRepository;
+import com.booklibrary.book_library_api.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

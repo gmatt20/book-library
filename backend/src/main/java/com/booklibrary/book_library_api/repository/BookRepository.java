@@ -1,5 +1,6 @@
-package com.booklibrary.book_library_api;
+package com.booklibrary.book_library_api.repository;
 
+import com.booklibrary.book_library_api.model.Book;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

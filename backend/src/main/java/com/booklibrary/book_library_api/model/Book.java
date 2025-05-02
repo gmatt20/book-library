@@ -1,4 +1,4 @@
-package com.booklibrary.book_library_api;
+package com.booklibrary.book_library_api.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
