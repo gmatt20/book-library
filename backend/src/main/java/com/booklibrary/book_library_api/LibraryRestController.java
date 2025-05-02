@@ -27,6 +27,7 @@ public class LibraryRestController {
         return bookRepository.findAll();
     }
 
+    // Deletes a book by ID
     @DeleteMapping("/book/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer id){
         if(bookRepository.existsById(id)){
@@ -36,6 +37,12 @@ public class LibraryRestController {
         else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
         }
+    }
+
+    // Deletes the entire library
+    @DeleteMapping("/book/clear")
+    public void clearLibrary(){
+        bookRepository.deleteAll();
     }
 
     // Put Mapping
