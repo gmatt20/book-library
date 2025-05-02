@@ -22,9 +22,17 @@ public class LibraryRestController {
         return "Saved!";
     }
 
+    // Gets the entire library
     @GetMapping("/book/all")
     public @ResponseBody Iterable<Book> getAllBooks(){
         return bookRepository.findAll();
+    }
+
+    // Gets a single book
+    @GetMapping("/book/{id}")
+    public Book getABook(@PathVariable Integer id){
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
     }
 
     // Deletes a book by ID
