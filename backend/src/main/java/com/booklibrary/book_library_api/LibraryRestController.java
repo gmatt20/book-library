@@ -11,6 +11,7 @@ import java.util.List;
 
 // Must also add URL as something to modify to database
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping(path="/library")
 public class LibraryRestController {
@@ -68,7 +69,7 @@ public class LibraryRestController {
         bookRepository.deleteAll();
     }
 
-    // Updates an existing book or creates a new boook
+    // Updates an existing book or creates a new book
     @PutMapping("/book/{id}")
     public Book modifyBook(@RequestBody Book updateBook, @PathVariable Integer id){
         return bookRepository.findById(id)
