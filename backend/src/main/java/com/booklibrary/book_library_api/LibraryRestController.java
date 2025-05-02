@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 // Must add validation to restful controller and Entity class
 
 // Must also add URL as something to modify to database
@@ -37,8 +39,10 @@ public class LibraryRestController {
     }
 
     // Searches for a book based on title
-
-    // Searches for a book based on author
+    @GetMapping("/book/search")
+    public List<Book> searchBooksByTitle(@RequestParam String keyword){
+        return bookRepository.findByTitleContainingIgnoreCase(keyword);
+    }
 
     // Deletes a book by ID
     @DeleteMapping("/book/{id}")
