@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -13,7 +14,11 @@ public class Book {
     private Integer id;
 
     @NotNull(message = "Must input title")
+    @NotBlank(message = "Title cannot be blank")
     private String title;
+
+    @NotNull(message = "Must input author")
+    @NotBlank(message = "Author cannot be blank")
     private String author;
     private String imageUrl;
 
