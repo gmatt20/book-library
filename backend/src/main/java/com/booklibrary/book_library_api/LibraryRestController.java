@@ -16,6 +16,7 @@ public class LibraryRestController {
 
     private BookRepository bookRepository;
 
+    // Adds a book to the library database
     @PostMapping("/book/add")
     public @ResponseBody String addNewBook(@RequestBody Book newBook){
         bookRepository.save(newBook);
@@ -35,6 +36,10 @@ public class LibraryRestController {
                 .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
     }
 
+    // Searches for a book based on title
+
+    // Searches for a book based on author
+
     // Deletes a book by ID
     @DeleteMapping("/book/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable Integer id){
@@ -53,7 +58,7 @@ public class LibraryRestController {
         bookRepository.deleteAll();
     }
 
-    // Put Mapping
+    // Updates an existing book or creates a new boook
     @PutMapping("/book/{id}")
     public Book modifyBook(@RequestBody Book updateBook, @PathVariable Integer id){
         return bookRepository.findById(id)
@@ -66,6 +71,4 @@ public class LibraryRestController {
                     return bookRepository.save(updateBook);
                 });
     }
-
-    // Patch Mapping
 }
