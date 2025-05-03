@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Ellipsis } from "lucide-react";
+import DropdownMenuComponent from "./dropdownmenucomponent";
 
 const Book = () => {
   const [isPopup, setPopup] = useState(false);
@@ -26,16 +26,6 @@ const Book = () => {
     getAllBooks();
   }, []);
 
-  const handlePopup = (book: any) => {
-    if (isPopup) {
-      setSelectedBook(null);
-      setPopup(false);
-    } else {
-      setSelectedBook(book);
-      setPopup(true);
-    }
-  };
-
   return (
     <>
       {books.map((book, index) => (
@@ -45,7 +35,7 @@ const Book = () => {
           <span
             onClick={() => handlePopup(book)}
             className="flex justify-end mb-2 cursor-pointer">
-            <Ellipsis />
+            <DropdownMenuComponent />
           </span>
           <div className="flex flex-col items-center text-center">
             <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
@@ -54,21 +44,6 @@ const Book = () => {
           </div>
         </div>
       ))}
-      {isPopup && (
-
-        <div className="fixed inset-0 bg-surface-a0 rounded overflow-hidden p-3 z-50">
-          <span
-            onClick={handlePopup}
-            className="flex justify-end mb-2 cursor-pointer">
-            <Ellipsis />
-          </span>
-          <div className="flex flex-col items-center text-center">
-            <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
-            <p className="mb-2 font-bold">{selectedBook.title}</p>
-            <p className="text-sm">{selectedBook.author}</p>
-          </div>
-        </div>
-      )}
     </>
   );
 };
