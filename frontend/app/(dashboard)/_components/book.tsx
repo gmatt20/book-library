@@ -2,9 +2,15 @@
 import { useState, useEffect } from "react";
 import DropdownMenuComponent from "./dropdownmenucomponent";
 import { deleteBook } from "@/lib/deleteBook";
+import EditModal from "./editmodal";
 
 const Book = () => {
   const [books, setBooks] = useState([]);
+  const [editBook, setEditBook] = useState<{
+    id: number;
+    title: string;
+    author: string;
+  } | null>(null);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -35,18 +41,11 @@ const Book = () => {
     bookTitle: string,
     bookAuthor: string
   ) => {
-    return (
-      <>
-        <div className="fixed inset-0 bg-surface-a10 w-72 min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
-          <div className="flex flex-col items-center text-center">
-            <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
-            <p className="mb-2 font-bold">{bookTitle}</p>
-            <p className="text-sm">{bookAuthor}</p>
-            <p className="text-sm">{bookId}</p>
-          </div>
-        </div>
-      </>
-    );
+    if (editBook) {
+      setEditBook(null);
+    } else {
+      setEditBook({ id: bookId, title: bookTitle, author: bookAuthor });
+    }
   };
 
   return (
@@ -71,6 +70,14 @@ const Book = () => {
           </div>
         </div>
       ))}
+      {editBook && (
+        <EditModal
+          bookId={editBook.id}
+          bookTitle={editBook.title}
+          bookAuthor={editBook.author}
+          onClose={() => setEditBook(null)}
+        />
+      )}
     </>
   );
 };
