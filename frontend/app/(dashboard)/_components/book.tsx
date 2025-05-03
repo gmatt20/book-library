@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Ellipsis } from "lucide-react";
 
 const Book = () => {
   const [isPopup, setPopup] = useState(false);
@@ -40,23 +41,31 @@ const Book = () => {
       {books.map((book, index) => (
         <div
           key={index}
-          onClick={() => handlePopup(book)}
-          className="bg-surface-a10 max-w-[80%] min-w-[100%] h-96 p-5 flex flex-col items-center justify-center gap-2 rounded-xl cursor-pointer">
-          <div className="h-60 w-40 bg-surface-a20"></div>
-          <p>{book.title}</p>
-          <p>{book.author}</p>
+          className="bg-surface-a10 w-[80%] min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
+          <span
+            onClick={() => handlePopup(book)}
+            className="flex justify-end mb-2 cursor-pointer">
+            <Ellipsis />
+          </span>
+          <div className="flex flex-col items-center text-center">
+            <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
+            <p className="mb-2 font-bold">{book.title}</p>
+            <p className="text-sm">{book.author}</p>
+          </div>
         </div>
       ))}
       {isPopup && (
-        <div
-          onClick={handlePopup}
-          className="fixed bg-surface-a0 inset-0 flex items-center justify-center z-50">
-          <div>
-            <div className="bg-surface-a10 w-fit p-5 flex flex-col items-center justify-center gap-2 m-5 rounded-xl cursor-pointer">
-              <div className="h-60 w-40 bg-surface-a20"></div>
-              <p>{selectedBook.title}</p>
-              <p>{selectedBook.author}</p>
-            </div>
+
+        <div className="fixed inset-0 bg-surface-a0 rounded overflow-hidden p-3 z-50">
+          <span
+            onClick={handlePopup}
+            className="flex justify-end mb-2 cursor-pointer">
+            <Ellipsis />
+          </span>
+          <div className="flex flex-col items-center text-center">
+            <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
+            <p className="mb-2 font-bold">{selectedBook.title}</p>
+            <p className="text-sm">{selectedBook.author}</p>
           </div>
         </div>
       )}
