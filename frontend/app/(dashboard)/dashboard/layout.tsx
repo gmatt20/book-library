@@ -6,9 +6,9 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="text-light-a0 bg-surface-a0">
+    <div className="text-light-a0 bg-surface-a0 h-screen w-screen">
       <Navbar />
-      <main>{children}</main>
+      <main className="lg:mx-40">{children}</main>
     </div>
   );
 }
