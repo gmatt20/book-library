@@ -1,26 +1,55 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Book = () => {
   const [isPopup, setPopup] = useState(false);
-  const handlePopup = () => {
-    console.log("entered");
+  const [books, setBooks] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+
+  useEffect(() => {
+     async function getAllBooks() {
+       try {
+         const response = await fetch(
+           "http://localhost:8080/library/book/all",
+           {
+             method: "GET",
+           }
+         );
+
+         if (!response.ok) {
+           throw new Error("Failed to fetch all books.");
+         }
+         const data = await response.json();
+         setBooks(data);
+       } catch (error) {
+         console.error(error);
+       }
+     }
+     getAllBooks();
+  },[]);
+
+  const handlePopup = (book: any) => {
     if (isPopup) {
+      setSelectedBook(null);
       setPopup(false);
     } else {
+      setSelectedBook(book);
       setPopup(true);
     }
   };
 
   return (
     <>
+    {books.map((book, index)=>(
       <div
-        onClick={handlePopup}
+        key={index}
+        onClick={() => handlePopup(book)}
         className="bg-surface-a10 w-fit p-5 flex flex-col items-center justify-center gap-2 m-5 rounded-xl cursor-pointer">
         <div className="h-60 w-40 bg-surface-a20"></div>
-        <p>Title</p>
-        <p>Author</p>
+        <p>{book.title}</p>
+        <p>{book.author}</p>
       </div>
+    ))}
       {isPopup && (
         <div
           onClick={handlePopup}
@@ -28,8 +57,8 @@ const Book = () => {
           <div>
             <div className="bg-surface-a10 w-fit p-5 flex flex-col items-center justify-center gap-2 m-5 rounded-xl cursor-pointer">
               <div className="h-60 w-40 bg-surface-a20"></div>
-              <p>Title</p>
-              <p>Author</p>
+              <p>{selectedBook.title}</p>
+              <p>{selectedBook.author}</p>
             </div>
           </div>
         </div>

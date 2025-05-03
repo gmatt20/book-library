@@ -6,11 +6,6 @@ const Library = () => {
       <p>Matthew&apos;s Library</p>
       <div className="grid grid-cols-3 grid-flow-row">
         <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
-        <Book />
       </div>
     </div>
   );
