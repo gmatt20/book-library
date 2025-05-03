@@ -5,6 +5,7 @@ import { useState, FormEvent } from "react";
 
 const Form = () => {
   const [isSaved, setSaved] = useState(false);
+  const [bookTitle, setBookTitle] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -13,6 +14,9 @@ const Form = () => {
       title: formData.get("title"),
       author: formData.get("author"),
     };
+
+    setBookTitle(data.title);
+
     const response = await fetch("http://localhost:8080/library/book/add", {
       method: "POST",
       headers: {
@@ -23,12 +27,14 @@ const Form = () => {
 
     if (!response.ok) {
       throw new Error("Failed to submit the data. Please try again.");
+    } else {
+      setSaved(true);
     }
     console.log(response);
   }
 
   return (
-    <>
+    <div>
       <form
         onSubmit={submit}
         className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
@@ -58,7 +64,8 @@ const Form = () => {
           </Button>
         </fieldset>
       </form>
-    </>
+      {isSaved && <p>{bookTitle} is added!</p>}
+    </div>
   );
 };
 
