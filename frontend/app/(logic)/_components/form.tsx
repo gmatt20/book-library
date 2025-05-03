@@ -2,10 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { useState, FormEvent } from "react";
+import { toast } from "sonner";
 
 const Form = () => {
-  const [isSaved, setSaved] = useState(false);
-  const [bookTitle, setBookTitle] = useState("");
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -14,8 +13,6 @@ const Form = () => {
       title: formData.get("title"),
       author: formData.get("author"),
     };
-
-    setBookTitle(data.title);
 
     const response = await fetch("http://localhost:8080/library/book/add", {
       method: "POST",
@@ -28,7 +25,7 @@ const Form = () => {
     if (!response.ok) {
       throw new Error("Failed to submit the data. Please try again.");
     } else {
-      setSaved(true);
+      toast(`${data.title} is added!`);
     }
     console.log(response);
   }
@@ -64,7 +61,6 @@ const Form = () => {
           </Button>
         </fieldset>
       </form>
-      {isSaved && <p>{bookTitle} is added!</p>}
     </div>
   );
 };
