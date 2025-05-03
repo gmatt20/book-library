@@ -13,7 +13,7 @@ import java.util.List;
 
 // Must also add URL as something to modify to database
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(path="/library")
 public class LibraryRestController {
