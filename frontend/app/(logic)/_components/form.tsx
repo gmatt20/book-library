@@ -1,9 +1,37 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { useState, FormEvent } from "react";
 
 const Form = () => {
+  const [isSaved, setSaved] = useState(false);
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      title: formData.get("title"),
+      author: formData.get("author"),
+    };
+    const response = await fetch("http://localhost:8080/library/book/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to submit the data. Please try again.");
+    }
+    console.log(response);
+  }
+
   return (
     <>
-      <form className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
+      <form
+        onSubmit={submit}
+        className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
         <p className="mb-5 text-2xl font-bold">Add a book to your library</p>
         <fieldset className="flex flex-col items-center justify-center">
           <label>Book Title</label>
