@@ -10,8 +10,6 @@ export async function deleteBook(bookId: number){
     if(!response.ok){
       throw new Error("Failed to delete the data. Please try again.");
     }
-
-    console.log(response.body);
   }
   catch(error){
     console.error(error);

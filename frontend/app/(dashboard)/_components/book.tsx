@@ -4,9 +4,7 @@ import DropdownMenuComponent from "./dropdownmenucomponent";
 import { deleteBook } from "@/lib/deleteBook";
 
 const Book = () => {
-  const [isPopup, setPopup] = useState(false);
   const [books, setBooks] = useState([]);
-  const [selectedBook, setSelectedBook] = useState(null);
 
   useEffect(() => {
     async function getAllBooks() {
@@ -37,7 +35,7 @@ const Book = () => {
       {books.map((book) => (
         <div
           key={book.id}
-          className="bg-surface-a10 w-[80%] min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
+          className="bg-surface-a10 w-72 min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
           <span className="flex justify-end mb-2 cursor-pointer">
             <DropdownMenuComponent bookId={book.id} onDelete={handleDelete} />
           </span>
