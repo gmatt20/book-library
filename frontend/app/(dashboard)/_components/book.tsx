@@ -30,6 +30,25 @@ const Book = () => {
     setBooks((prev) => prev.filter((book) => book.id !== bookId));
   };
 
+  const handleEdit = (
+    bookId: number,
+    bookTitle: string,
+    bookAuthor: string
+  ) => {
+    return (
+      <>
+        <div className="fixed inset-0 bg-surface-a10 w-72 min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
+          <div className="flex flex-col items-center text-center">
+            <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
+            <p className="mb-2 font-bold">{bookTitle}</p>
+            <p className="text-sm">{bookAuthor}</p>
+            <p className="text-sm">{bookId}</p>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       {books.map((book) => (
@@ -37,7 +56,13 @@ const Book = () => {
           key={book.id}
           className="bg-surface-a10 w-72 min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
           <span className="flex justify-end mb-2 cursor-pointer">
-            <DropdownMenuComponent bookId={book.id} onDelete={handleDelete} />
+            <DropdownMenuComponent
+              bookId={book.id}
+              bookTitle={book.title}
+              bookAuthor={book.author}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+            />
           </span>
           <div className="flex flex-col items-center text-center">
             <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>

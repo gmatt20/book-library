@@ -11,10 +11,13 @@ import { Ellipsis } from "lucide-react";
 
 type Props = {
   bookId: number;
+  bookTitle: string,
+  bookAuthor: string,
   onDelete: (id: number) => void;
+  onEdit: (id: number, title: string, author: string) => void;
 };
 
-const DropdownMenuComponent = ({ bookId, onDelete }: Props) => {
+const DropdownMenuComponent = ({ bookId, bookTitle, bookAuthor, onDelete, onEdit }: Props) => {
 
   return (
     <DropdownMenu>
@@ -25,7 +28,7 @@ const DropdownMenuComponent = ({ bookId, onDelete }: Props) => {
         <DropdownMenuLabel>Book Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onEdit(bookId, bookTitle, bookAuthor)}>Edit</DropdownMenuItem>
           <DropdownMenuItem onClick={() => onDelete(bookId)}>
             Delete
           </DropdownMenuItem>
