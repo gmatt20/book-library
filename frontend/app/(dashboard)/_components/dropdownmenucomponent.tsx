@@ -9,7 +9,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 
-const DropdownMenuComponent = () => {
+type Props = {
+  bookId: number;
+  onDelete: (id: number) => void;
+};
+
+const DropdownMenuComponent = ({ bookId, onDelete }: Props) => {
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -20,7 +26,9 @@ const DropdownMenuComponent = () => {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onDelete(bookId)}>
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -3,8 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
+  const router = useRouter();
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -26,6 +29,9 @@ const Form = () => {
       throw new Error("Failed to submit the data. Please try again.");
     } else {
       toast(`${data.title} is added!`);
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     }
     console.log(response);
   }

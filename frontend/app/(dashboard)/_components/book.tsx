@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import DropdownMenuComponent from "./dropdownmenucomponent";
+import { deleteBook } from "@/lib/deleteBook";
 
 const Book = () => {
   const [isPopup, setPopup] = useState(false);
@@ -26,16 +27,19 @@ const Book = () => {
     getAllBooks();
   }, []);
 
+  const handleDelete = async (bookId: number) => {
+    await deleteBook(bookId);
+    setBooks((prev) => prev.filter((book) => book.id !== bookId));
+  };
+
   return (
     <>
-      {books.map((book, index) => (
+      {books.map((book) => (
         <div
-          key={index}
+          key={book.id}
           className="bg-surface-a10 w-[80%] min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit">
-          <span
-            onClick={() => handlePopup(book)}
-            className="flex justify-end mb-2 cursor-pointer">
-            <DropdownMenuComponent />
+          <span className="flex justify-end mb-2 cursor-pointer">
+            <DropdownMenuComponent bookId={book.id} onDelete={handleDelete} />
           </span>
           <div className="flex flex-col items-center text-center">
             <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
