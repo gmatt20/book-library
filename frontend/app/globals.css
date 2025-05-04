@@ -16,12 +16,12 @@
   --color-primary-a50: #ade8cc;
 
   /* Theme surface colors */
-  --color-surface-a0: #121212;
-  --color-surface-a10: #282828;
-  --color-surface-a20: #3f3f3f;
-  --color-surface-a30: #575757;
-  --color-surface-a40: #717171;
-  --color-surface-a50: #8b8b8b;
+  --color-surface-a0: #0D1117;
+  --color-surface-a10: #24272c;
+  --color-surface-a20: #3b3e43;
+  --color-surface-a30: #54565b;
+  --color-surface-a40: #6e7074;
+  --color-surface-a50: #898b8e;
 
   /* Theme tonal surface colors */
   --color-surface-tonal-a0: #18221d;

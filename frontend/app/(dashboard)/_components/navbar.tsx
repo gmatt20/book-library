@@ -11,15 +11,25 @@ const Navbar = () => {
   const handleClear = async () => {
     await clearLibrary();
     router.refresh();
-  }
+  };
 
   return (
     <div className="flex items-center justify-between p-5 border-b-2 border-surface-a10">
-      <p>Matthew&apos;s Dashboard</p>
+      <p className="text-primary-a50 text-3xl font-bold uppercase">
+        Books Central
+      </p>
       <ul className="flex items-center justify-center gap-3">
-        <Button variant="destructive" onClick={handleClear}>Clear Library</Button>
-        <Link href="/add">Add a Book</Link>
-        <Link href="/library">Look at library</Link>
+        <Button
+          variant="destructive"
+          className="text-lg font-bold uppercase"
+          onClick={handleClear}>
+          Clear Library
+        </Button>
+        <Link
+          className="text-primary-a50 text-lg font-bold uppercase"
+          href="/add">
+          <Button className="text-lg font-bold uppercase">Add a Book</Button>
+        </Link>
       </ul>
     </div>
   );
