@@ -59,7 +59,7 @@ const Book = () => {
           key={book.id}
           className="bg-surface-a10 w-72 min-h-[100%] max-w-[80%] min-w-[50%] rounded overflow-hidden p-3 h-fit 
           border-2 border-transparent hover:border-2 hover:border-primary-a0 transition duration-400 ease-in-out">
-          <span className="flex justify-end mb-2 cursor-pointer">
+          <span className="flex justify-end mb-2">
             <DropdownMenuComponent
               bookId={book.id}
               bookTitle={book.title}

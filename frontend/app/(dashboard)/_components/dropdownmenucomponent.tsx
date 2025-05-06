@@ -21,14 +21,17 @@ const DropdownMenuComponent = ({ bookId, bookTitle, bookAuthor, onDelete, onEdit
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger className="cursor-pointer" asChild>
         <Ellipsis />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Book Settings</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => onEdit(bookId, bookTitle, bookAuthor)}>Edit</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => onEdit(bookId, bookTitle, bookAuthor)}>
+            Edit
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onDelete(bookId)}>
             Delete
           </DropdownMenuItem>
