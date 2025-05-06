@@ -31,7 +31,7 @@ const Form = () => {
       toast(`${data.title} is added!`);
       setTimeout(() => {
         router.push("/dashboard");
-      }, 1000);
+      }, 500);
     }
     console.log(response);
   }
