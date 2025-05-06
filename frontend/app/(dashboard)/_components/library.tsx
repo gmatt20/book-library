@@ -4,7 +4,7 @@ const Library = () => {
     return (
         <div
             className="flex flex-col items-center justify-center md:m-10 md:border-2 md:border-surface-a10 rounded-2xl">
-            <p className="text-primary-a50 text-2xl font-bold uppercase border-b-2 border-primary-a50 w-full text-center py-3">
+            <p className="text-primary-a50 text-xl md:text-2xl font-bold uppercase border-b-2 border-primary-a50 w-full text-center py-3">
                 Matthew&apos;s Library
             </p>
             <div

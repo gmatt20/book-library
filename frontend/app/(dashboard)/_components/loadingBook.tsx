@@ -3,7 +3,7 @@ import {Ellipsis} from "lucide-react";
 const LoadingBook = () => {
     return (
         <div
-            className="bg-surface-a10 md:w-[120%] w-[150%] rounded overflow-hidden p-3 h-fit
+            className="bg-surface-a10 w-[60%] sm:w-[50%] md:w-[80%]  rounded overflow-hidden p-3 h-fit
           border-2 border-transparent">
       <span className="flex animate-pulse justify-end mb-2 cursor-pointer">
         <Ellipsis/>
