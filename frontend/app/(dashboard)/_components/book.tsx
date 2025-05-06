@@ -59,7 +59,7 @@ const Book = () => {
             {books.map((book) => (
                 <div
                     key={book.id}
-                    className="bg-surface-a10 w-[60%] sm:w-[50%] md:w-[80%] rounded overflow-hidden p-3
+                    className="bg-surface-a10 w-[100%] min-w-[30%] max-w-[60%] md:min-w-[60%] md:max-w-[60%] rounded overflow-hidden p-3
           border-2 border-transparent hover:border-2 hover:border-primary-a0 transition duration-400 ease-in-out">
           <span className="flex justify-end mb-2">
             <DropdownMenuComponent
