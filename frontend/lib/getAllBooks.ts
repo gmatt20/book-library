@@ -1,5 +1,4 @@
 async function getAllBooks() {
-    let data;
     try {
         const response = await fetch("http://localhost:8080/library/book/all", {
             method: "GET",
@@ -8,12 +7,11 @@ async function getAllBooks() {
         if (!response.ok) {
             throw new Error("Failed to fetch all books.");
         }
-        data = await response.json();
+        return await response.json();
     } catch (error) {
         console.error(error);
+        return null;
     }
-
-    return data;
 }
 
 export default getAllBooks;
