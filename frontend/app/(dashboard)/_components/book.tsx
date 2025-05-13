@@ -14,25 +14,24 @@ const Book = () => {
     } | null>(null);
     const [isLoading, setLoading] = useState(true);
 
+    async function getAllBooks() {
+        try {
+            const response = await fetch("http://localhost:8080/library/book/all", {
+                method: "GET",
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to fetch all books.");
+            }
+            const data = await response.json();
+            setBooks(data);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     useEffect(() => {
         setLoading(true);
-
-        async function getAllBooks() {
-            try {
-                const response = await fetch("http://localhost:8080/library/book/all", {
-                    method: "GET",
-                });
-
-                if (!response.ok) {
-                    throw new Error("Failed to fetch all books.");
-                }
-                const data = await response.json();
-                setBooks(data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-
         getAllBooks();
         setLoading(false);
     }, []);
