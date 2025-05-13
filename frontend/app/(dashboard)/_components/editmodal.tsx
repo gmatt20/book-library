@@ -14,6 +14,7 @@ type Props = {
 const EditModal = ({ bookId, bookTitle, bookAuthor, onClose }: Props) => {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    onClose();
 
     const formData = new FormData(event.currentTarget);
     const data = {
@@ -72,7 +73,7 @@ const EditModal = ({ bookId, bookTitle, bookAuthor, onClose }: Props) => {
             Upload Optional Image Cover
           </Button>
           <Button
-            onClick={onClose}
+            type="submit"
             variant="secondary"
             className="mt-10 cursor-pointer bg-green-600">
             Save changes
