@@ -4,7 +4,7 @@ import DropdownMenuComponent from "./dropdownmenucomponent";
 import {deleteBook} from "@/lib/deleteBook";
 import EditModal from "./editmodal";
 import LoadingBook from "./loadingBook";
-import getAllBooks from "@/lib/getAllBooks";
+import {getAllBooks} from "@/lib/getAllBooks";
 
 const Book = () => {
     const [books, setBooks] = useState([]);
@@ -16,11 +16,10 @@ const Book = () => {
     const [isLoading, setLoading] = useState(true);
 
 
-
     useEffect(() => {
         const fetchBooks = async () => {
             setLoading(true);
-            const library =  await getAllBooks();
+            const library = await getAllBooks();
             setBooks(library || []);
             setLoading(false);
         };

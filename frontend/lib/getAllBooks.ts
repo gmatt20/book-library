@@ -1,4 +1,4 @@
-async function getAllBooks() {
+export async function getAllBooks() {
     try {
         const response = await fetch("http://localhost:8080/library/book/all", {
             method: "GET",
@@ -13,5 +13,3 @@ async function getAllBooks() {
         return null;
     }
 }
-
-export default getAllBooks;
