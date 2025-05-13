@@ -4,6 +4,7 @@ import DropdownMenuComponent from "./dropdownmenucomponent";
 import {deleteBook} from "@/lib/deleteBook";
 import EditModal from "./editmodal";
 import LoadingBook from "./loadingBook";
+import getAllBooks from "@/lib/getAllBooks";
 
 const Book = () => {
     const [books, setBooks] = useState([]);
@@ -14,26 +15,16 @@ const Book = () => {
     } | null>(null);
     const [isLoading, setLoading] = useState(true);
 
-    async function getAllBooks() {
-        try {
-            const response = await fetch("http://localhost:8080/library/book/all", {
-                method: "GET",
-            });
 
-            if (!response.ok) {
-                throw new Error("Failed to fetch all books.");
-            }
-            const data = await response.json();
-            setBooks(data);
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     useEffect(() => {
-        setLoading(true);
-        getAllBooks();
-        setLoading(false);
+        const fetchBooks = async () => {
+            setLoading(true);
+            const library =  await getAllBooks();
+            setBooks(library || []);
+            setLoading(false);
+        };
+        fetchBooks();
     }, []);
 
     const handleDelete = async (bookId: number) => {
