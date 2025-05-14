@@ -48,9 +48,9 @@ const Book = () => {
             {books.map((book) => (
                 <div
                     key={book.id}
-                    className="bg-surface-a10 w-[100%] min-w-[30%] max-w-[60%] md:min-w-[60%] md:max-w-[60%] rounded overflow-hidden p-3
+                    className=" rounded overflow-hidden p-1
           border-2 border-transparent hover:border-2 hover:border-primary-a0 transition duration-400 ease-in-out">
-          <span className="flex justify-end mb-2">
+          <span className="flex justify-end ">
             <DropdownMenuComponent
                 bookId={book.id}
                 bookTitle={book.title}
@@ -60,9 +60,9 @@ const Book = () => {
             />
           </span>
                     <div className="flex flex-col items-center text-center">
-                        <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2"></div>
-                        <p className="mb-2 font-bold">{book.title}</p>
-                        <p className="text-sm">{book.author}</p>
+                        <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2 rounded-md"></div>
+                        <p className="mb-2 font-bold text-sm md:text-xl">{book.title}</p>
+                        <p className="text-xs">{book.author}</p>
                     </div>
                 </div>
             ))}

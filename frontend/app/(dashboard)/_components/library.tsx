@@ -8,7 +8,7 @@ const Library = () => {
                 Matthew&apos;s Library
             </p>
             <div
-                className="grid grid-cols-1 md:grid-cols-2 grid-flow-row place-items-center gap-10 md:px-0 p-10 py-10 w-full">
+                className="grid grid-cols-2 md:grid-cols-2 grid-flow-row place-items-center md:p-10 w-full">
                 <Book/>
             </div>
         </div>
