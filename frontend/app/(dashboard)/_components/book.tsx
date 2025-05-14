@@ -48,7 +48,7 @@ const Book = () => {
             {books.map((book) => (
                 <div
                     key={book.id}
-                    className=" rounded overflow-hidden p-1
+                    className="text-ellipsis overflow-hidden w-[100%] rounded  p-1
           border-2 border-transparent hover:border-2 hover:border-primary-a0 transition duration-400 ease-in-out">
           <span className="flex justify-end ">
             <DropdownMenuComponent
@@ -61,8 +61,8 @@ const Book = () => {
           </span>
                     <div className="flex flex-col items-center text-center">
                         <div className="h-60 w-40 bg-surface-a20 col-span-1 mb-2 rounded-md"></div>
-                        <p className="mb-2 font-bold text-sm md:text-xl">{book.title}</p>
-                        <p className="text-xs">{book.author}</p>
+                        <p className="mb-2 font-bold text-sm md:text-md truncate w-40">{book.title}</p>
+                        <p className="text-xs truncate w-40">{book.author}</p>
                     </div>
                 </div>
             ))}

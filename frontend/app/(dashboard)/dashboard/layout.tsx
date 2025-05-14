@@ -8,7 +8,7 @@ export default function Layout({
     return (
         <div className="text-light-a0 bg-surface-a0 h-fit w-screen">
             <Navbar/>
-            <main className="lg:mx-40">{children}</main>
+            <main className="lg:mx-[10%]">{children}</main>
         </div>
     );
 }
