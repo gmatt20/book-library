@@ -31,9 +31,9 @@ const Form = () => {
             throw new Error("Failed to submit the data. Please try again.");
         } else {
             toast(`${data.title} is added!`);
-            setTimeout(() => {
+            if (!multipleBooks) {
                 router.push("/dashboard");
-            }, 500);
+            }
         }
         console.log(response);
     }
