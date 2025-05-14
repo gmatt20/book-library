@@ -48,11 +48,11 @@ const Form = () => {
 
     return (
         <div className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
-            <form
-                onSubmit={submit}
+            <form className="flex flex-col items-center"
+                  onSubmit={submit}
             >
                 <p className="mb-5 text-2xl font-bold">Add a book to your library</p>
-                <div className="flex items-center space-x-2 m-5">
+                <div className="flex items-center space-x-2 m-5 w-fit">
                     <Switch onClick={handleToggle}/>
                     <label>Add Multiple Books</label>
                 </div>
