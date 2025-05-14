@@ -10,6 +10,11 @@ const Form = () => {
     const [multipleBooks, toggleMultipleBooks] = useState(false)
     const router = useRouter();
 
+    const handleToggle = () => {
+        if (multipleBooks) toggleMultipleBooks(false);
+        else toggleMultipleBooks(true);
+    }
+
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
@@ -45,7 +50,7 @@ const Form = () => {
                 className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
                 <p className="mb-5 text-2xl font-bold">Add a book to your library</p>
                 <div className="flex items-center space-x-2 m-5">
-                    <Switch/>
+                    <Switch onClick={handleToggle}/>
                     <label>Add Multiple Books</label>
                 </div>
                 <fieldset className="flex flex-col items-center justify-center">
