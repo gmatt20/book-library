@@ -1,7 +1,7 @@
 "use client";
 
 import {Button} from "@/components/ui/button";
-import {FormEvent, useState} from "react";
+import {FormEvent, useState, useRef} from "react";
 import {toast} from "sonner";
 import {useRouter} from "next/navigation";
 import {Switch} from "@/components/ui/switch";
@@ -9,6 +9,7 @@ import {Switch} from "@/components/ui/switch";
 const Form = () => {
     const [multipleBooks, toggleMultipleBooks] = useState(false)
     const router = useRouter();
+    const formRef = useRef(null);
 
     const handleToggle = () => {
         if (multipleBooks) toggleMultipleBooks(false);
@@ -42,13 +43,13 @@ const Form = () => {
             if (!multipleBooks) {
                 handleRedirect();
             }
+            formRef.current?.reset();
         }
-        console.log(response);
     }
 
     return (
         <div className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
-            <form className="flex flex-col items-center"
+            <form ref={formRef} className="flex flex-col items-center"
                   onSubmit={submit}
             >
                 <p className="mb-5 text-2xl font-bold">Add a book to your library</p>
