@@ -14,6 +14,9 @@ const Form = () => {
         if (multipleBooks) toggleMultipleBooks(false);
         else toggleMultipleBooks(true);
     }
+    const handleRedirect = () => {
+        router.push("/dashboard");
+    }
 
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -37,17 +40,17 @@ const Form = () => {
         } else {
             toast(`${data.title} is added!`);
             if (!multipleBooks) {
-                router.push("/dashboard");
+                handleRedirect();
             }
         }
         console.log(response);
     }
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
             <form
                 onSubmit={submit}
-                className="flex flex-col items-center justify-center p-5 border-2 border-surface-a10 rounded-2xl">
+            >
                 <p className="mb-5 text-2xl font-bold">Add a book to your library</p>
                 <div className="flex items-center space-x-2 m-5">
                     <Switch onClick={handleToggle}/>
@@ -78,6 +81,12 @@ const Form = () => {
                     </Button>
                 </fieldset>
             </form>
+            <Button
+                onClick={handleRedirect}
+                variant="ghost"
+                className="mt-5 cursor-pointer ">
+                Go To Dashboard
+            </Button>
         </div>
     );
 };
