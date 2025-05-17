@@ -73,7 +73,7 @@ const Form = () => {
                         name="author"
                     />
                     <Button variant="secondary" className="cursor-pointer mt-5">
-                        Upload Optional Image Cover
+                        Add An Image
                     </Button>
                     <Button
                         variant="secondary"
