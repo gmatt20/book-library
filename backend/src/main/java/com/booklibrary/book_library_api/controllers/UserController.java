@@ -3,6 +3,7 @@ package com.booklibrary.book_library_api.controllers;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import com.booklibrary.book_library_api.model.AuthRequest;
@@ -42,5 +43,12 @@ public class UserController {
     } else {
       throw new RuntimeException("Invalid Credentials");
     }
+  }
+
+  @GetMapping("/user")
+  public String getUserInfo(){
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String username = authentication.getName();
+    return "Welcome " + username + "! You are authenticated.";
   }
 }
