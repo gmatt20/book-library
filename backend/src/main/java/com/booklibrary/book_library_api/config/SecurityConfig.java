@@ -16,14 +16,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.booklibrary.book_library_api.filter.JwtAuthFilter;
 
+// Configures Spring Security for the application
+// It sets up authentication, authorization, and JWT token handling
+// It also defines the security filter chain and authentication provider
+// Why: To secure the application and protect sensitive endpoints
+
+// @Configuration: Indicates that this class contains Spring configuration
 @Configuration
+// @EnableWebSecurity: Enables Spring Security's web security support
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final PasswordEncoder passwordEncoder;
+  // Dependencies
+
+  // PasswordEncoder: Used to encode passwords
+  // Used for hashing passwords before storing them
+  private final PasswordEncoder passwordEncoder;
+  // JwtAuthFilter: Custom filter for JWT authentication
+  // Used for validating JWT tokens in requests
   private final JwtAuthFilter jwtAuthFilter;
+  // UserDetailsService: Loads user-specific data
+  // Used for authentication and authorization
   private final UserDetailsService userDetailsService;
   
+  // Constructor
   public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
     this.jwtAuthFilter = jwtAuthFilter;
     this.userDetailsService = userDetailsService;
@@ -31,6 +47,8 @@ public class SecurityConfig {
   }
 
   @Bean
+  // Establishes security filter chain
+  // Authorizes HTTP requests by authenticating and passing through filters
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
     http.csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/welcome", "/auth/addNewUser","/auth/generateToken").permitAll()
