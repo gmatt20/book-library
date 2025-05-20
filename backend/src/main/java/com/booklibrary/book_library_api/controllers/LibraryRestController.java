@@ -1,4 +1,4 @@
-package com.booklibrary.book_library_api.controller;
+package com.booklibrary.book_library_api.controllers;
 
 import com.booklibrary.book_library_api.repository.BookRepository;
 import com.booklibrary.book_library_api.model.Book;
