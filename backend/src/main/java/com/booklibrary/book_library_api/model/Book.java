@@ -19,10 +19,6 @@ public class Book {
     private String author;
     private String imageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User owner;
-
     public Integer getId(){
         return id;
     }
