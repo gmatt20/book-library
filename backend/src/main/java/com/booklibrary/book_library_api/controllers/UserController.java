@@ -13,6 +13,7 @@ import com.booklibrary.book_library_api.service.UserInfoService;
 
 import lombok.RequiredArgsConstructor;
 
+// Endpoints for authentication
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -35,8 +36,7 @@ public class UserController {
   @PostMapping("/generateToken")
   public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
     Authentication authentication = authenticationManager.authenticate(
-      new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
-    );
+        new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 
     if (authentication.isAuthenticated()) {
       return jwtService.generateToken(authRequest.getUsername());
@@ -46,7 +46,7 @@ public class UserController {
   }
 
   @GetMapping("/user")
-  public String getUserInfo(){
+  public String getUserInfo() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String username = authentication.getName();
     return "Welcome " + username + "! You are authenticated.";

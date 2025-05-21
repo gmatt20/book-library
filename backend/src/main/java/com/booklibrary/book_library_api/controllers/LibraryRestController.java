@@ -15,7 +15,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
-@RequestMapping(path="/library")
+@RequestMapping(path = "/library")
 public class LibraryRestController {
     @Autowired
 
@@ -23,57 +23,56 @@ public class LibraryRestController {
 
     // Adds a book to the library database
     @PostMapping("/book/add")
-    public @ResponseBody String addNewBook(@RequestBody Book newBook){
+    public @ResponseBody String addNewBook(@RequestBody Book newBook) {
         bookRepository.save(newBook);
         return "Saved!";
     }
 
     // Gets the entire library
     @GetMapping("/book/all")
-    public @ResponseBody Iterable<Book> getAllBooks(){
+    public @ResponseBody Iterable<Book> getAllBooks() {
         return bookRepository.findAll();
     }
 
     // Gets a single book
     @GetMapping("/book/{id}")
-    public Book getABook(@PathVariable Integer id){
+    public Book getABook(@PathVariable Integer id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
     }
 
     // Searches for a book based on title
     @GetMapping("/book/search/by-title")
-    public List<Book> searchBooksByTitle(@RequestParam String keyword){
+    public List<Book> searchBooksByTitle(@RequestParam String keyword) {
         return bookRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
     // Searches for a book based on author
     @GetMapping("/book/search/by-author")
-    public List<Book> searchBooksByAuthor(@RequestParam String keyword){
+    public List<Book> searchBooksByAuthor(@RequestParam String keyword) {
         return bookRepository.findByAuthorContainingIgnoreCase(keyword);
     }
 
     // Deletes a book by ID
     @DeleteMapping("/book/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable Integer id){
-        if(bookRepository.existsById(id)){
+    public ResponseEntity<String> deleteBook(@PathVariable Integer id) {
+        if (bookRepository.existsById(id)) {
             bookRepository.deleteById(id);
             return ResponseEntity.ok("Successfully deleted from database!");
-        }
-        else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Book not found.");
         }
     }
 
     // Deletes the entire library
     @DeleteMapping("/book/clear")
-    public void clearLibrary(){
+    public void clearLibrary() {
         bookRepository.deleteAll();
     }
 
     // Updates an existing book or creates a new book
     @PutMapping("/book/{id}")
-    public Book modifyBook(@RequestBody Book updateBook, @PathVariable Integer id){
+    public Book modifyBook(@RequestBody Book updateBook, @PathVariable Integer id) {
         return bookRepository.findById(id)
                 .map(book -> {
                     book.setAuthor(updateBook.getAuthor());
