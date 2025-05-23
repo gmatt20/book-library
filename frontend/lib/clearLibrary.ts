@@ -1,5 +1,5 @@
-export async function clearLibrary(){
-  try{
+export async function clearLibrary() {
+  try {
     const response = await fetch("http://localhost:8080/library/book/clear", {
       method: "DELETE",
       headers: {
@@ -7,11 +7,10 @@ export async function clearLibrary(){
       },
     });
 
-    if(!response.ok){
+    if (!response.ok) {
       throw new Error("Failed to delete entire library. Please try again.");
     }
-  }
-  catch(error){
+  } catch (error) {
     console.error(error);
   }
 }

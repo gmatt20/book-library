@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "npx prettier --write .",
+    "eslint": "npx eslint . -c eslint.config.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.12",

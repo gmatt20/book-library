@@ -11,14 +11,19 @@ import { Ellipsis } from "lucide-react";
 
 type Props = {
   bookId: number;
-  bookTitle: string,
-  bookAuthor: string,
+  bookTitle: string;
+  bookAuthor: string;
   onDelete: (id: number) => void;
   onEdit: (id: number, title: string, author: string) => void;
 };
 
-const DropdownMenuComponent = ({ bookId, bookTitle, bookAuthor, onDelete, onEdit }: Props) => {
-
+const DropdownMenuComponent = ({
+  bookId,
+  bookTitle,
+  bookAuthor,
+  onDelete,
+  onEdit,
+}: Props) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer" asChild>
@@ -29,7 +34,8 @@ const DropdownMenuComponent = ({ bookId, bookTitle, bookAuthor, onDelete, onEdit
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem
-            onClick={() => onEdit(bookId, bookTitle, bookAuthor)}>
+            onClick={() => onEdit(bookId, bookTitle, bookAuthor)}
+          >
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => onDelete(bookId)}>

@@ -30,7 +30,7 @@ const EditModal = ({ bookId, bookTitle, bookAuthor, onClose }: Props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -50,7 +50,8 @@ const EditModal = ({ bookId, bookTitle, bookAuthor, onClose }: Props) => {
       <X onClick={onClose} />
       <form
         onSubmit={submit}
-        className=" flex flex-col items-center justify-center p-5 rounded-2xl">
+        className=" flex flex-col items-center justify-center p-5 rounded-2xl"
+      >
         <p className="mb-5 text-2xl font-bold">Edit {bookTitle}</p>
         <fieldset className="flex flex-col items-center justify-center">
           <label>Book Title</label>
@@ -75,7 +76,8 @@ const EditModal = ({ bookId, bookTitle, bookAuthor, onClose }: Props) => {
           <Button
             type="submit"
             variant="secondary"
-            className="mt-10 cursor-pointer bg-green-600">
+            className="mt-10 cursor-pointer bg-green-600"
+          >
             Save changes
           </Button>
         </fieldset>
