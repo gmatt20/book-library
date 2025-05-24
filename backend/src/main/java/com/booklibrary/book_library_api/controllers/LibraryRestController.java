@@ -1,19 +1,23 @@
 package com.booklibrary.book_library_api.controllers;
 
 import com.booklibrary.book_library_api.repository.BookRepository;
+import com.booklibrary.book_library_api.repository.UserInfoRepository;
 import com.booklibrary.book_library_api.model.Book;
+import com.booklibrary.book_library_api.model.UserInfo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 // Must add validation to restful controller and Entity class
 
 // Must also add URL as something to modify to database
 
-@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(path = "/library")
 public class LibraryRestController {
@@ -21,9 +25,18 @@ public class LibraryRestController {
 
     private BookRepository bookRepository;
 
+    @Autowired
+    private UserInfoRepository userInfoRepository;
+
     // Adds a book to the library database
     @PostMapping("/book/add")
-    public @ResponseBody String addNewBook(@RequestBody Book newBook) {
+    public String addNewBook(@RequestBody Book newBook) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserInfo user = userInfoRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found with username " + username));
+        
+        newBook.setUser(user);
+
         bookRepository.save(newBook);
         return "Saved!";
     }
@@ -31,14 +44,27 @@ public class LibraryRestController {
     // Gets the entire library
     @GetMapping("/book/all")
     public @ResponseBody Iterable<Book> getAllBooks() {
-        return bookRepository.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserInfo user = userInfoRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found with username " + username));
+
+        return user.getBooks();
     }
 
     // Gets a single book
     @GetMapping("/book/{id}")
     public Book getABook(@PathVariable Integer id) {
-        return bookRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found with id " + id));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserInfo currUser = userInfoRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if(!book.getUser().getId().equals(currUser.getId())){
+            throw new RuntimeException("NOT ALLOWED");
+        }
+
+        return book;
     }
 
     // Searches for a book based on title

@@ -38,9 +38,10 @@ public class SecurityConfig {
   // UserDetailsService: Loads user-specific data
   // Used for authentication and authorization
   private final UserDetailsService userDetailsService;
-  
+
   // Constructor
-  public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+  public SecurityConfig(JwtAuthFilter jwtAuthFilter, UserDetailsService userDetailsService,
+      PasswordEncoder passwordEncoder) {
     this.jwtAuthFilter = jwtAuthFilter;
     this.userDetailsService = userDetailsService;
     this.passwordEncoder = passwordEncoder;
@@ -49,20 +50,22 @@ public class SecurityConfig {
   @Bean
   // Establishes security filter chain
   // Authorizes HTTP requests by authenticating and passing through filters
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/welcome", "/auth/addNewUser","/auth/generateToken").permitAll()
-            .requestMatchers("/auth/**").authenticated()
-            .anyRequest().authenticated())
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider())
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-    
+        .authorizeHttpRequests(
+            auth -> auth.requestMatchers("/auth/welcome", "/auth/addNewUser", "/auth/generateToken").permitAll()
+                .requestMatchers("/auth/**").authenticated()
+                .requestMatchers("/library/**").authenticated()
+                .anyRequest().authenticated())
+        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authenticationProvider(authenticationProvider())
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
     return http.build();
   }
 
   @Bean
-  public AuthenticationProvider authenticationProvider(){
+  public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
     provider.setUserDetailsService(userDetailsService);
     provider.setPasswordEncoder(passwordEncoder);
